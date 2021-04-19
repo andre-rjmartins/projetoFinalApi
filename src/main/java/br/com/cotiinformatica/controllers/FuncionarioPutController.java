@@ -45,7 +45,9 @@ public class FuncionarioPutController {
 			}
 			else {
 				
-				if(service.findById(dto.getIdFuncionario()) == null) {
+				Funcionario funcionario = service.findById(dto.getIdFuncionario());
+				
+				if(funcionario == null) {
 					result.add("Este funcionário não encontra-se cadastrado.");
 					
 					return ResponseEntity
@@ -61,7 +63,11 @@ public class FuncionarioPutController {
 				}
 				else{
 					
-					Funcionario funcionario = DTOEntityAdapter.getFuncionario(dto);
+					Funcionario funcionarioAtualizado = DTOEntityAdapter.getFuncionario(dto);
+					
+					funcionario.setNome(funcionarioAtualizado.getNome());
+					funcionario.setCpf(funcionarioAtualizado.getCpf());
+					funcionario.setSalario(funcionarioAtualizado.getSalario());
 					
 					service.createOrUpdate(funcionario);
 					result.add("Funcionário atualizado com sucesso.");

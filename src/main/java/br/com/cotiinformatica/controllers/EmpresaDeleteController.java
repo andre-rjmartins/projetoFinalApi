@@ -46,12 +46,11 @@ public class EmpresaDeleteController {
 						.body(result);
 			}
 			else {
+				
 				List<Funcionario> funcionarios = funcionarioService.findByIdEmpresa(idEmpresa);
 				for(Funcionario item : funcionarios) {
-					Funcionario funcionario = item;
-					funcionario.setEmpresa(null);
 					
-					funcionarioService.createOrUpdate(funcionario);
+					funcionarioService.delete(item);
 				}
 				
 				empresaService.delete(empresa);

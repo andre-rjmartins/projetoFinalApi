@@ -42,6 +42,12 @@ public class FuncionarioService {
 	}
 	
 	/*
+	public void deleteByIdEmpresa(Integer idEmpresa) throws Exception {
+		repository.deleteByIdEmpresa(idEmpresa);
+	}
+	*/
+	
+	/*
 	public void updateIdEmpresa(Integer idEmpresa) throws Exception {
 		repository.updateIdEmpresa(idEmpresa);
 	}
