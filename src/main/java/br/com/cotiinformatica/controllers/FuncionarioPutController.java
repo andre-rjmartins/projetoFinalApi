@@ -54,30 +54,34 @@ public class FuncionarioPutController {
 							.status(HttpStatus.NOT_FOUND)
 							.body(result);
 				}
-				else if(service.findByCpf(dto.getCpf()) != null && service.findById(dto.getIdFuncionario()).getCpf() != dto.getCpf() ) {
-					result.add("Este CPF já encontra-se cadastrado, tente outro.");
+				else {
 					
-					return ResponseEntity
-							.status(HttpStatus.FORBIDDEN)
-							.body(result);
-				}
-				else{
-					
-					Funcionario funcionarioAtualizado = DTOEntityAdapter.getFuncionario(dto);
-					
-					funcionario.setNome(funcionarioAtualizado.getNome());
-					funcionario.setCpf(funcionarioAtualizado.getCpf());
-					funcionario.setSalario(funcionarioAtualizado.getSalario());
-					
-					service.createOrUpdate(funcionario);
-					result.add("Funcionário atualizado com sucesso.");
-					
-					return ResponseEntity
-							.status(HttpStatus.OK)
-							.body(result);
+					Funcionario item = service.findByCpf(dto.getCpf());
+					if(item != null && item.getIdFuncionario() != funcionario.getIdFuncionario()) {
+						
+						result.add("Este CPF já encontra-se cadastrado, tente outro.");
+						
+						return ResponseEntity
+								.status(HttpStatus.FORBIDDEN)
+								.body(result);
+					}
+					else{
+						
+						Funcionario funcionarioAtualizado = DTOEntityAdapter.getFuncionario(dto);
+						
+						funcionario.setNome(funcionarioAtualizado.getNome());
+						funcionario.setCpf(funcionarioAtualizado.getCpf());
+						funcionario.setSalario(funcionarioAtualizado.getSalario());
+						
+						service.createOrUpdate(funcionario);
+						result.add("Funcionário atualizado com sucesso.");
+						
+						return ResponseEntity
+								.status(HttpStatus.OK)
+								.body(result);
+					}
 				}
 			}
-			
 		}
 		catch(Exception e) {
 			result.add("Erro: " + e.getMessage());

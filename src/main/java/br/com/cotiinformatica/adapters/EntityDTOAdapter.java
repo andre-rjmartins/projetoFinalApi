@@ -4,6 +4,7 @@ import br.com.cotiinformatica.dtos.EmpresaGetDTO;
 import br.com.cotiinformatica.dtos.FuncionarioGetDTO;
 import br.com.cotiinformatica.entities.Empresa;
 import br.com.cotiinformatica.entities.Funcionario;
+import br.com.cotiinformatica.utils.DateUtil;
 
 public class EntityDTOAdapter {
 	
@@ -14,7 +15,7 @@ public class EntityDTOAdapter {
 		dto.setIdFuncionario(funcionario.getIdFuncionario());
 		dto.setNome(funcionario.getNome());
 		dto.setCpf(funcionario.getCpf());
-		dto.setDataAdmissao(funcionario.getDataAdmissao());
+		dto.setDataAdmissao(DateUtil.formatDate(funcionario.getDataAdmissao()));
 		dto.setSalario(funcionario.getSalario());
 		dto.setEmpresa(funcionario.getEmpresa());
 		

@@ -1,5 +1,6 @@
 package br.com.cotiinformatica.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -16,6 +17,13 @@ public class DateUtil {
 		
 		Calendar result = new GregorianCalendar(ano, mes - 1, dia);
 		return result.getTime();
+	}
+	
+	public static String formatDate(Date date) {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		
+		return sdf.format(date);
 	}
 	
 	//método para converter a hora HH:mm

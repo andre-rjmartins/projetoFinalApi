@@ -1,7 +1,5 @@
 package br.com.cotiinformatica.dtos;
 
-import java.util.Date;
-
 import br.com.cotiinformatica.entities.Empresa;
 
 public class FuncionarioGetDTO {
@@ -9,7 +7,7 @@ public class FuncionarioGetDTO {
 	private Integer idFuncionario;
 	private String nome;
 	private String cpf;
-	private Date dataAdmissao;
+	private String dataAdmissao;
 	private Double salario;
 	private Empresa empresa;
 
@@ -37,11 +35,11 @@ public class FuncionarioGetDTO {
 		this.cpf = cpf;
 	}
 
-	public Date getDataAdmissao() {
+	public String getDataAdmissao() {
 		return dataAdmissao;
 	}
 
-	public void setDataAdmissao(Date dataAdmissao) {
+	public void setDataAdmissao(String dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
 	}
 

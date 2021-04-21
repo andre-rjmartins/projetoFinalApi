@@ -16,13 +16,4 @@ public interface IFuncionarioRepository extends CrudRepository<Funcionario, Inte
 	@Query("select f from Funcionario f where f.empresa.idEmpresa =:param")
 	List<Funcionario> findByIdEmpresa(@Param("param") Integer idEmpresa);
 	
-	/*
-	@Query("delete from Funcionario f where f.empresa.idEmpresa =:param")
-	void deleteByIdEmpresa(@Param("param") Integer idEmpresa);
-	*/
-	
-	/*
-	@Query("update Funcionario f set f.empresa.idEmpresa = 1 where f.empresa.idEmpresa =:param")
-	void updateIdEmpresa(@Param("param") Integer idEmpresa);
-	*/
 }

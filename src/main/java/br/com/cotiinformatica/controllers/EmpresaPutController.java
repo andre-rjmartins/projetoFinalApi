@@ -52,44 +52,47 @@ public class EmpresaPutController {
 							.status(HttpStatus.NOT_FOUND)
 							.body(result);
 				}
-				
-				else if(service.findById(dto.getIdEmpresa()).getRazaoSocial() != dto.getRazaoSocial() && service.findByRazaoSocial(dto.getRazaoSocial()) != null) {
-					result.add("Esta Razão Social já encontra-se cadastrada, tente outra.");
-					
-					return ResponseEntity
-							.status(HttpStatus.FORBIDDEN)
-							.body(result);
-				}
-				
-				else if(service.findByCnpj(dto.getCnpj()) != null && service.findById(dto.getIdEmpresa()).getCnpj() != dto.getCnpj()) {
-					result.add("Este CNPJ já encontra-se cadastrado, tente outro.");
-					
-					return ResponseEntity
-							.status(HttpStatus.FORBIDDEN)
-							.body(result);
-				}
 				else {
-					Empresa empresa = DTOEntityAdapter.getEmpresa(dto);
 					
-					if(service.findById(empresa.getIdEmpresa()) != null) {
-						
-						service.createOrUpdate(empresa);
-						result.add("Empresa atualizada com sucesso.");
+					Empresa item1 = service.findByRazaoSocial(dto.getRazaoSocial());
+					Empresa item2 = service.findByCnpj(dto.getCnpj());
+					
+					if(item1 != null && item1.getIdEmpresa() != dto.getIdEmpresa()) {
+						result.add("Esta Razão Social já encontra-se cadastrada, tente outra.");
 						
 						return ResponseEntity
-								.status(HttpStatus.OK)
+								.status(HttpStatus.FORBIDDEN)
+								.body(result);
+					}
+					else if(item2 != null && item2.getIdEmpresa() != dto.getIdEmpresa()) {
+						result.add("Este CNPJ já encontra-se cadastrado, tente outro.");
+						
+						return ResponseEntity
+								.status(HttpStatus.FORBIDDEN)
 								.body(result);
 					}
 					else {
-						result.add("Empresa não encontrada.");
 						
-						return ResponseEntity
-								.status(HttpStatus.NOT_FOUND)
-								.body(result);
+						if(service.findById(dto.getIdEmpresa()) != null) {
+							Empresa empresa = DTOEntityAdapter.getEmpresa(dto);
+							
+							service.createOrUpdate(empresa);
+							result.add("Empresa atualizada com sucesso.");
+							
+							return ResponseEntity
+									.status(HttpStatus.OK)
+									.body(result);
+						}
+						else {
+							result.add("Empresa não encontrada.");
+							
+							return ResponseEntity
+									.status(HttpStatus.NOT_FOUND)
+									.body(result);
+						}
 					}
 				}
 			}
-			
 		}
 		catch(Exception e) {
 			result.add("Erro: " + e.getMessage());

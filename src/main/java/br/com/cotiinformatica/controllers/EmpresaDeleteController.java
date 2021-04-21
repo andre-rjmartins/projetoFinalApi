@@ -14,18 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.cotiinformatica.entities.Empresa;
-import br.com.cotiinformatica.entities.Funcionario;
 import br.com.cotiinformatica.services.EmpresaService;
-import br.com.cotiinformatica.services.FuncionarioService;
 
 @Controller
 public class EmpresaDeleteController {
 
 	@Autowired
 	private EmpresaService empresaService;
-	
-	@Autowired
-	private FuncionarioService funcionarioService;
 	
 	@CrossOrigin
 	@RequestMapping(value = "/api/empresas/{idEmpresa}", method = RequestMethod.DELETE)
@@ -46,12 +41,6 @@ public class EmpresaDeleteController {
 						.body(result);
 			}
 			else {
-				
-				List<Funcionario> funcionarios = funcionarioService.findByIdEmpresa(idEmpresa);
-				for(Funcionario item : funcionarios) {
-					
-					funcionarioService.delete(item);
-				}
 				
 				empresaService.delete(empresa);
 				

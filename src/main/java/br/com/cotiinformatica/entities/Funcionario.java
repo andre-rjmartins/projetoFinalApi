@@ -36,7 +36,7 @@ public class Funcionario {
 	private Double salario;
 	
 	@ManyToOne
-	@JoinColumn(name = "idEmpresa", nullable = true)
+	@JoinColumn(name = "idEmpresa", nullable = false)
 	private Empresa empresa;
 	
 	public Funcionario() {

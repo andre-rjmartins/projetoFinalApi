@@ -1,6 +1,7 @@
 package br.com.cotiinformatica.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -30,7 +31,13 @@ public class FuncionarioService {
 	}
 	
 	public Funcionario findById(Integer id) throws Exception{
-		return repository.findById(id).get();
+		
+		Optional<Funcionario> funcionario = repository.findById(id);
+		if(funcionario.isPresent()) {
+			return funcionario.get();
+		}
+		
+		return null;
 	}
 	
 	public Funcionario findByCpf(String cpf) throws Exception{
@@ -41,15 +48,4 @@ public class FuncionarioService {
 		return repository.findByIdEmpresa(idEmpresa);
 	}
 	
-	/*
-	public void deleteByIdEmpresa(Integer idEmpresa) throws Exception {
-		repository.deleteByIdEmpresa(idEmpresa);
-	}
-	*/
-	
-	/*
-	public void updateIdEmpresa(Integer idEmpresa) throws Exception {
-		repository.updateIdEmpresa(idEmpresa);
-	}
-	*/
 }

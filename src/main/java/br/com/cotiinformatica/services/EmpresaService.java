@@ -1,6 +1,7 @@
 package br.com.cotiinformatica.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -30,7 +31,12 @@ public class EmpresaService {
 	}
 	
 	public Empresa findById(Integer id) throws Exception{
-		return repository.findById(id).get();
+		Optional<Empresa> empresa = repository.findById(id);
+		if(empresa.isPresent()) {
+			return empresa.get();
+		}
+		
+		return null;
 	}
 	
 	public Empresa findByRazaoSocial(String razaoSocial) throws Exception{

@@ -73,14 +73,14 @@ public class EmpresaGetController {
 				
 				return ResponseEntity
 						.status(HttpStatus.NOT_FOUND)
-						.body(dto);
+						.body(null);
 			}
 			
 		}
 		catch(Exception e) {
 			return ResponseEntity
 					.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body(dto);
+					.body(null);
 		}
 	}
 }
